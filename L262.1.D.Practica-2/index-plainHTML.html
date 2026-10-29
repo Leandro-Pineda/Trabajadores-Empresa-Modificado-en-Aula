@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trabajadores Empresa - HTML Plano</title>
+</head>
+<body>
+  <section id="body">
+    <h2>Gestion de Trabajadores Empresa (HTML Plano)</h2>
+    <button id="body_btNuevoTrabajador">Nuevo Trabajador</button>
+    <hr>
+    <div>
+      El monto total de nómina pagada es: <span id="body_lblMontoNomina">$0.00</span>
+    </div>
+    <div>
+      El Promedio de Salario es: <span id="body_lblPromedioSalario">0.00</span>$
+    </div>
+    <div id="body_reportesTrabajadores"></div>
+  </section>
+
+  <section id="trabajador" hidden style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; width: 300px;">
+    <h5 id="trabajador_lblTrabajador">Procesar Trabajador</h5>
+    <div>
+      <label>Nombre:
+        <input type="text" id="trabajador_inNombre" placeholder="Nombre del trabajador">
+      </label>
+    </div>
+    <div>
+      <label>Horas regulares:
+        <input type="number" id="trabajador_inHRegular" placeholder="Ej: 10" min="0" step="0.5">
+      </label>
+    </div>
+    <div>
+      <label>Horas extras:
+        <input type="number" id="trabajador_inHExtra" placeholder="Ej: 20" min="0" step="0.5">
+      </label>
+    </div>
+    <br>
+    <button id="trabajador_btCancelar">Cancelar</button>
+    <button id="trabajador_btAceptar">Aceptar</button>
+  </section>
+
+  <script type="module">
+    import cEmpresa from "./dist/controllers/cEmpresa.js";
+    import cTrabajador from "./dist/controllers/cTrabajador.js";
+
+    // Importamos SOLO las vistas planas
+    import vEmpresaPlain from "./dist/views/vEmpresaPlain.js";
+    import vTrabajadorPlain from "./dist/views/vTrabajadorPlain.js";
+
+    // 1. Instanciamos las vistas
+    const vistaEmpresa = new vEmpresaPlain();
+    const vistaTrabajador = new vTrabajadorPlain();
+
+    // 2. Inyectamos las vistas en los controladores (¡La magia ocurre aquí!)
+    const controladorTrabajador = new cTrabajador(vistaTrabajador);
+    new cEmpresa(vistaEmpresa, controladorTrabajador);
+  </script>
+</body>
+
+</html>

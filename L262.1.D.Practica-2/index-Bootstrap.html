@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trabajadores Empresa - Bootstrap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="app-bootstrap" class="container mt-5">
+    <h2>Gestion de Trabajadores Empresa (Bootstrap)</h2>
+    <button type="button" class="btn btn-primary" id="body_btNuevoTrabajador">Nuevo Trabajador</button>
+    <hr>
+    <div class="alert alert-success">
+      <div>El monto total de nómina pagada es: <span id="body_lblMontoNomina" class="fw-bold">$0.00</span></div>
+      <div id="body_reportesTrabajadores"></div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="trabajador" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Procesar Trabajador</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="trabajador_inNombre">
+          <label class="form-label">Horas regulares:</label>
+          <input type="number" class="form-control" id="trabajador_inHRegular" min="0" step="0.5">
+          <label class="form-label">Horas extras:</label>
+          <input type="number" class="form-control" id="trabajador_inHExtra" min="0" step="0.5">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="trabajador_btCancelar">Cancelar</button>
+          <button type="button" class="btn btn-success" id="trabajador_btAceptar">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module">
+    import cEmpresa from "./dist/controllers/cEmpresa.js";
+    import cTrabajador from "./dist/controllers/cTrabajador.js";
+
+    // Importamos SOLO las vistas de Bootstrap
+    import vEmpresaBootstrap from "./dist/views/vEmpresaBootstrap.js";
+    import vTrabajadorBootstrap from "./dist/views/vTrabajadorBootstrap.js";
+
+    // 1. Instanciamos las vistas
+    const vistaEmpresa = new vEmpresaBootstrap();
+    const vistaTrabajador = new vTrabajadorBootstrap();
+
+    // 2. Inyectamos las vistas en los mismos controladores
+    const controladorTrabajador = new cTrabajador(vistaTrabajador);
+    new cEmpresa(vistaEmpresa, controladorTrabajador);
+  </script>
+</body>
+
+</html>
